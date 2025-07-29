@@ -1,0 +1,38 @@
+{
+  "builders": [
+    {
+      "type": "azure-arm",
+      "client_id": "349bace4-6acf-409b-a276-ae1dcf1c60cd",
+      "client_secret": "fEQ8Q~u2prvvIA0EBIH3yu5wJBOtvbclW5llQaRl",
+      "tenant_id": "f958e84a-92b8-439f-a62d-4f45996b6d07",
+      "subscription_id": "c9f1e8cb-24a3-405b-9046-bf2b34125d0c",
+
+      "managed_image_resource_group_name": "NetworkWatcherRG",
+      "managed_image_name": "myPackerImage",
+
+      "os_type": "Linux",
+      "image_publisher": "Canonical",
+      "image_offer": "UbuntuServer",
+      "image_sku": "18.04-LTS",
+
+      "location": "eastus",
+      "vm_size": "Standard_DS2_v2",
+
+      "azure_tags": {
+        "environment": "linux",
+        "owner": "reem.alzahrani",
+        "cost-center": "12345"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline_shebang": "/bin/sh -x",
+      "inline": [
+        "echo 'Hello, World!' > index.html",
+        "nohup busybox httpd -f -p 80 &"
+      ]
+    }
+  ]
+}
